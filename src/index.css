@@ -10,4 +10,6 @@
     .fs-5{
        @apply  text-[clamp(16px,2vw,26px)]
     }
+
+
 }

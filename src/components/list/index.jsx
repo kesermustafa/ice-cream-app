@@ -1,6 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import api from '../../api';
+import TrendButton from './TrendButton';
+import Loader from '../loader/Loader';
+import Error from '../error/Error';
+import Card from '../card';
+import Cart from '../basket';
 
 const List = () => {
   const [data, setData] = useState(null);
@@ -16,23 +20,28 @@ const List = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  console.log(isLoading, data, error);
-
   return (
     <div className="mt-7 lg:mt-[120px]">
-      <div className="flex justify-end ">
-        <button
-          className=" relative flex items-center gap-2 text-black text-[20px]  lg:text-[24px]  
-        font-semibold bg-white rounded-full px-4 pr-12 py-1 hover:bg-white/75 transition"
-        >
-          Trending
-          <img
-            className="absolute end-0 bottom-1 size-11"
-            src="/fire.png"
-            alt=""
-          />
-        </button>
+      <div className='flex justify-between items-center'>
+        <Cart />
+        <TrendButton />
       </div>
+
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Error info={error} />
+      ) : (
+        data && (
+          <div className="mt-8 grid lg:grid-cols-2 gap-4 lg:gap-8">
+            {data.map((item, index) => (
+              <div key={index}>
+                <Card item={item} />
+              </div>
+            ))}
+          </div>
+        )
+      )}
     </div>
   );
 };

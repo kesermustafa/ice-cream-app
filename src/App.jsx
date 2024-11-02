@@ -6,7 +6,7 @@ import Home from './pages/home';
 const App = () => {
   return (
     <BrowserRouter>
-      <div className='text-white bg-custom-gradient py-[30px] 2xl:py-[50px] px-[5%]'>
+      <div className='min-h-screen text-white bg-custom-gradient py-[30px] 2xl:py-[50px] px-[5%] select-none'>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
